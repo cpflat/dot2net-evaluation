@@ -2,7 +2,7 @@
 
 # Environmental Setup
 
-This experiment requires docker environment and root privilege on your computer.
+This experiment requires docker environment and sudo privilege on your Linux computer.
 In addition, we use dot2net and containerlab, so install them at first.
 
 [Containerlab](https://containerlab.dev/)
@@ -13,21 +13,21 @@ In addition, we use dot2net and containerlab, so install them at first.
 ## What are the files in this directory?
 
 There are two main files `ospf.dot` and `ospf.yaml` in this directory.
-These files are the input for dot2net.
+These files are the input for dot2net (file names can be changed).
 DOT is a graph description language used in [Graphviz](https://graphviz.org/).
 If you have installed graphviz, you can generate a visualized graph from `ospf.dot` with the following command. 
 
     dot -Tpdf ospf.dot > ospf.pdf
 
 Comparing the `ospf.dot` and the generated visualized graph,
-you can see lines 2-4 defines the nodes and lines 6-7 defines the links between the nodes.
+you can see lines 2-4 in the `ospf.dot` defines the nodes and lines 6-7 defines the links between the nodes.
 The detailed DOT grammar is explained in the [Graphviz documentation](https://graphviz.org/doc/info/lang.html).
 
 You will also see that there is an attribute `class=router` for each node.
 It means the node belongs to an ObjectClass `router`.
 The ObjectClass is defined in `ospf.yaml`.
 
-`ospf.yaml` defines what kind of configuration file to generate based on the given DOT file.
+`ospf.yaml` defines what kind of configuration files to generate based on the given DOT file.
 It includes files definitions to generate, IP address assignment policy, and ObjectClass definitions (with container image and config template blocks).
 The files are generated for each nodes respectively, and binded to the container at the given path.
 In this case, `daemons` and `vtysh.conf` will be placed as is in this directory, and `frr.conf` will be generated with the config templates.
