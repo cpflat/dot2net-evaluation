@@ -1,4 +1,4 @@
-name: ospf_simple
+name: tutorial
 
 file:
   - name: frr.conf

@@ -1,0 +1,26 @@
+digraph  {
+
+	subgraph cluster1 {
+		label="area=0.0.0.0";
+		r1[class="router"];
+		r2[class="router"];
+		r3[class="router"];
+		sw1[class="switch"];
+	}
+
+	subgraph cluster2 {
+		label="area=0.0.0.1";
+		r4[class="router"];
+		r5[class="router"];
+		sw2[class="switch"];
+		sw3[class="switch"];
+	}
+
+	r1->sw1[dir="none"];
+	r2->sw1[dir="none"];
+	r3->sw1[dir="none"];
+	r3->sw2[dir="none"];
+	r4->sw2[dir="none"];
+	r4->sw3[dir="none"];
+	r5->sw3[dir="none"];
+}

@@ -1,0 +1,114 @@
+name: bgp_features
+mgmt: {}
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+      exec:
+      - chown frr:frr /var/log/frr.log
+      binds:
+      - r1/zebra.conf:/etc/frr/zebra.conf
+      - r1/vtysh.conf:/etc/frr/vtysh.conf
+      - r1/ospfd.conf:/etc/frr/ospfd.conf
+      - r1/ospf6d.conf:/etc/frr/ospf6d.conf
+      - r1/frr.log:/var/log/frr.log
+      - r1/daemons:/etc/frr/daemons
+      - r1/bgpd.conf:/etc/frr/bgpd.conf
+    r2:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+      exec:
+      - chown frr:frr /var/log/frr.log
+      binds:
+      - r2/zebra.conf:/etc/frr/zebra.conf
+      - r2/vtysh.conf:/etc/frr/vtysh.conf
+      - r2/ospfd.conf:/etc/frr/ospfd.conf
+      - r2/ospf6d.conf:/etc/frr/ospf6d.conf
+      - r2/frr.log:/var/log/frr.log
+      - r2/daemons:/etc/frr/daemons
+      - r2/bgpd.conf:/etc/frr/bgpd.conf
+    r3:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+      exec:
+      - chown frr:frr /var/log/frr.log
+      binds:
+      - r3/zebra.conf:/etc/frr/zebra.conf
+      - r3/vtysh.conf:/etc/frr/vtysh.conf
+      - r3/ospfd.conf:/etc/frr/ospfd.conf
+      - r3/ospf6d.conf:/etc/frr/ospf6d.conf
+      - r3/frr.log:/var/log/frr.log
+      - r3/daemons:/etc/frr/daemons
+    r4:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+      exec:
+      - chown frr:frr /var/log/frr.log
+      binds:
+      - r4/zebra.conf:/etc/frr/zebra.conf
+      - r4/vtysh.conf:/etc/frr/vtysh.conf
+      - r4/frr.log:/var/log/frr.log
+      - r4/daemons:/etc/frr/daemons
+      - r4/bgpd.conf:/etc/frr/bgpd.conf
+    r5:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+      exec:
+      - chown frr:frr /var/log/frr.log
+      binds:
+      - r5/zebra.conf:/etc/frr/zebra.conf
+      - r5/vtysh.conf:/etc/frr/vtysh.conf
+      - r5/frr.log:/var/log/frr.log
+      - r5/daemons:/etc/frr/daemons
+      - r5/bgpd.conf:/etc/frr/bgpd.conf
+    sw0:
+      kind: linux
+      image: nicolaka/netshoot
+      exec:
+      - ip link add br0 type bridge
+      - ip link set br0 up
+      - ip link set dev net0 promisc on
+      - ip link set dev net0 master br0
+      - ip link set dev net1 promisc on
+      - ip link set dev net1 master br0
+    sw1:
+      kind: linux
+      image: nicolaka/netshoot
+      exec:
+      - ip link add br0 type bridge
+      - ip link set br0 up
+      - ip link set dev net0 promisc on
+      - ip link set dev net0 master br0
+      - ip link set dev net1 promisc on
+      - ip link set dev net1 master br0
+    sw2:
+      kind: linux
+      image: nicolaka/netshoot
+      exec:
+      - ip link add br0 type bridge
+      - ip link set br0 up
+      - ip link set dev net0 promisc on
+      - ip link set dev net0 master br0
+      - ip link set dev net1 promisc on
+      - ip link set dev net1 master br0
+    sw3:
+      kind: linux
+      image: nicolaka/netshoot
+      exec:
+      - ip link add br0 type bridge
+      - ip link set br0 up
+      - ip link set dev net0 promisc on
+      - ip link set dev net0 master br0
+      - ip link set dev net1 promisc on
+      - ip link set dev net1 master br0
+  links:
+  - endpoints: [r1:net0, sw0:net0]
+  - endpoints: [r1:net1, sw1:net0]
+  - endpoints: [r1:net2, sw2:net0]
+  - endpoints: [r2:net0, sw0:net1]
+  - endpoints: [r2:net1, sw3:net0]
+  - endpoints: [r3:net0, sw1:net1]
+  - endpoints: [r4:net0, sw2:net1]
+  - endpoints: [r5:net0, sw3:net1]
+

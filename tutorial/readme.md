@@ -60,7 +60,7 @@ The try deploying the container network with following command.
     sudo containerlab deploy --topo topo.yaml
 
 You can check the containers successfully deployed with `docker ps` command.
-You can also attach the login shell of the containers for example with `docker exec -it r1 /bin/sh`.
+You can also attach the login shell of the containers for example with `docker exec -it clab-tutorial-r1 /bin/sh`.
 Please check that the node `r1` is accessible with the node `r3` using ping command.
 
 After testing the network, you can remove the network with following command.

@@ -1,0 +1,36 @@
+digraph  {
+        subgraph cluster1 {
+                label="as=65000";
+		r1[class="router; bgp; ospf"];
+		r2[class="router; bgp; ospf"];
+		r3[class="router; ospf"];
+		sw0[class="switch"];
+		sw1[class="switch"];
+		r6[class="router; ospf"];
+		sw4[class="switch"];
+        }
+
+	subgraph cluster2 {
+		label="as=65001";
+		r4[class="router; bgp"];
+	}
+
+	subgraph cluster3 {
+		label="as=65002";
+		r5[class="router; bgp"];
+	}
+
+	sw2[class="switch"];
+	sw3[class="switch"];
+
+	r1->sw0[dir="none", tailclass="ibgp; ospf; priority=10"];
+	r2->sw0[dir="none", tailclass="ibgp; ospf; priority=5"]
+	r1->sw1[dir="none", tailclass="ospf; priority=10"];
+	r3->sw1[dir="none", tailclass="ospf; priority=5"];
+	r1->sw2[dir="none", tailclass="ebgp"];
+	r4->sw2[dir="none", tailclass="ebgp"];
+	r2->sw3[dir="none", tailclass="ebgp"];
+	r5->sw3[dir="none", tailclass="ebgp"];
+	r2->sw4[dir="none", tailclass="ospf; priority=10"];
+	r6->sw4[dir="none", tailclass="ospf; priority=5"];
+}

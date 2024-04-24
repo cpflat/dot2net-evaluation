@@ -1,0 +1,63 @@
+name: test-rip
+mgmt: {}
+topology:
+  nodes:
+    r1:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+      exec:
+      - chown frr:frr /var/log/frr.log
+      binds:
+      - r1/zebra.conf:/etc/frr/zebra.conf
+      - r1/vtysh.conf:/etc/frr/vtysh.conf
+      - r1/ripd.conf:/etc/frr/ripd.conf
+      - r1/frr.log:/var/log/frr.log
+      - r1/daemons:/etc/frr/daemons
+    r2:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+      exec:
+      - chown frr:frr /var/log/frr.log
+      binds:
+      - r2/zebra.conf:/etc/frr/zebra.conf
+      - r2/vtysh.conf:/etc/frr/vtysh.conf
+      - r2/ripd.conf:/etc/frr/ripd.conf
+      - r2/frr.log:/var/log/frr.log
+      - r2/daemons:/etc/frr/daemons
+    r3:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+      exec:
+      - chown frr:frr /var/log/frr.log
+      binds:
+      - r3/zebra.conf:/etc/frr/zebra.conf
+      - r3/vtysh.conf:/etc/frr/vtysh.conf
+      - r3/ripd.conf:/etc/frr/ripd.conf
+      - r3/frr.log:/var/log/frr.log
+      - r3/daemons:/etc/frr/daemons
+    sw1:
+      kind: linux
+      image: nicolaka/netshoot
+      exec:
+      - ip link add br0 type bridge
+      - ip link set br0 up
+      - ip link set dev net0 promisc on
+      - ip link set dev net0 master br0
+      - ip link set dev net1 promisc on
+      - ip link set dev net1 master br0
+    sw2:
+      kind: linux
+      image: nicolaka/netshoot
+      exec:
+      - ip link add br0 type bridge
+      - ip link set br0 up
+      - ip link set dev net0 promisc on
+      - ip link set dev net0 master br0
+      - ip link set dev net1 promisc on
+      - ip link set dev net1 master br0
+  links:
+  - endpoints: [r1:net0, sw1:net0]
+  - endpoints: [r2:net0, sw1:net1]
+  - endpoints: [r2:net1, sw2:net0]
+  - endpoints: [r3:net0, sw2:net1]
+

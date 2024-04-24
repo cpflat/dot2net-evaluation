@@ -1,0 +1,102 @@
+name: test-rip
+
+file:
+  - name: zebra.conf
+    path: /etc/frr/zebra.conf
+  - name: ripd.conf
+    path: /etc/frr/ripd.conf
+  - name: daemons
+    path: /etc/frr/daemons
+  - name: vtysh.conf
+    path: /etc/frr/vtysh.conf
+  - name: frr.log
+    path: /var/log/frr.log
+
+layer:
+  - name: ip
+    default_connect: true
+    policy:
+      - name: ip
+        range: 10.0.0.0/16
+        prefix: 24
+      - name: lo
+        type: loopback
+        range: 10.0.255.0/24
+
+nodeclass:
+  - name: switch
+    primary: true
+    tinet:
+      image: nicolaka/netshoot
+    clab:
+      kind: linux
+      image: nicolaka/netshoot
+    config:
+      - template:
+          - ip link add br0 type bridge
+          - ip link set br0 up
+  - name: router
+    primary: true
+    params: [lo]
+    interface_policy: [ip]
+    tinet:
+      image: quay.io/frrouting/frr:8.5.4
+    clab:
+      kind: linux
+      image: quay.io/frrouting/frr:8.5.4
+    config:
+      - template:
+          - chown frr:frr /var/log/frr.log 
+      - file: daemons
+        sourcefile: ./daemons
+      - file: vtysh.conf
+        sourcefile: ./vtysh.conf
+      - file: frr.log
+        sourcefile: ./frr.log
+      - file: zebra.conf
+        template:
+          - "log file /var/log/frr.log"
+          - "ip forwarding"
+          - "ipv6 forwarding"
+          - "!"
+      - file: ripd.conf
+        template:
+          - "router rip"
+          - " version 2"
+          - " timers basic 5 180 5"
+          - " redistribute connected"
+          - " redistribute static"
+          - "!"
+
+connectionclass:
+  - name: all
+    config:
+      - node: switch
+        template:
+          - ip link set dev {{ .name }} promisc on
+          - ip link set dev {{ .name }} master br0
+  - name: default
+    config:
+      - node: router
+        file: zebra.conf
+        template:
+          - "interface {{ .name }}"
+          - " ip address {{ .ip_addr }}/{{ .ip_plen }}"
+          - "!"
+  - name: rip
+    config:
+      - node: router
+        file: ripd.conf
+        template:
+          - "router rip"
+          - " network {{ .ip_net }}"
+          - "!"
+      - node: router
+        file: zebra.conf
+        template:
+          - "interface {{ .name }}"
+          - " description to {{ .opp_node_name }} - RIPv2 interface"
+          - " ip address {{ .ip_addr }}/{{ .ip_plen }}"
+          - " no link-detect"
+          - "!"
+
