@@ -2,15 +2,15 @@ digraph  {
 	r1[class="router"];
 	r2[class="router"];
 	r3[class="router"];
-	r4[class="router"];
+	r4[class="router", color="red", fontcolor="red"];
 	sw1[class="switch"];
 	sw2[class="switch"];
-	sw3[class="switch"];
+	sw3[class="switch", color="red", fontcolor="red"];
 
 	r1->sw1[dir="none", class="rip"];
 	r2->sw1[dir="none", class="rip"];
 	r2->sw2[dir="none", class="rip"];
 	r3->sw2[dir="none", class="rip"];
-	r3->sw3[dir="none", class="rip"];
-	r4->sw3[dir="none", class="rip"];
+	r3->sw3[dir="none", class="rip", color="red"];
+	r4->sw3[dir="none", class="rip", color="red"];
 }

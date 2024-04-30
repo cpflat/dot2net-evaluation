@@ -11,9 +11,9 @@ digraph  {
 	subgraph cluster2 {
 		label="area=0.0.0.1";
 		r4[class="router"];
-		r5[class="router"];
 		sw2[class="switch"];
-		sw3[class="switch"];
+		r5[class="router", color="red", fontcolor="red"];
+		sw3[class="switch", color="red", fontcolor="red"];
 	}
 
 	r1->sw1[dir="none"];
@@ -21,6 +21,6 @@ digraph  {
 	r3->sw1[dir="none"];
 	r3->sw2[dir="none"];
 	r4->sw2[dir="none"];
-	r4->sw3[dir="none"];
-	r5->sw3[dir="none"];
+	r4->sw3[dir="none", color="red"];
+	r5->sw3[dir="none", color="red"];
 }

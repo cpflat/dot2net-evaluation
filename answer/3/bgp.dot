@@ -6,8 +6,8 @@ digraph  {
 		r3[class="router; ospf"];
 		sw0[class="switch"];
 		sw1[class="switch"];
-		r6[class="router; ospf"];
-		sw4[class="switch"];
+		r6[class="router; ospf", color="red", fontcolor="red"];
+		sw4[class="switch", color="red", fontcolor="red"];
         }
 
 	subgraph cluster2 {
@@ -31,6 +31,6 @@ digraph  {
 	r4->sw2[dir="none", tailclass="ebgp"];
 	r2->sw3[dir="none", tailclass="ebgp"];
 	r5->sw3[dir="none", tailclass="ebgp"];
-	r2->sw4[dir="none", tailclass="ospf; priority=10"];
-	r6->sw4[dir="none", tailclass="ospf; priority=5"];
+	r2->sw4[dir="none", tailclass="ospf; priority=10", color="red"];
+	r6->sw4[dir="none", tailclass="ospf; priority=5", color="red"];
 }

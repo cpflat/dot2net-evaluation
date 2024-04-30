@@ -1,24 +1,24 @@
-# 環境構築例 (Ubuntuの場合)
+# Building environment (for Ubuntu)
 
-## Dockerの環境構築
+## Docker
 
     sudo apt install docker docker.io
 
     sudo usermod -aG docker $USER
-    docker ps  # "Permission denied"が出ないことを確認
+    docker ps  # Check that it does not output "Permission denied"
 
 
-## Containerlabの環境構築
+## Containerlab
 
-[インストールガイド](https://containerlab.dev/install/)
+[Installation guide](https://containerlab.dev/install/)
 
     echo "deb [trusted=yes] https://apt.fury.io/netdevops/ /" | sudo tee -a /etc/apt/sources.list.d/netdevops.list
     sudo apt update && sudo apt install containerlab
 
 
-## dot2netの環境構築
+## dot2net
 
-[インストールガイド](https://github.com/cpflat/dot2net/readme.md)
+[Installation guide](https://github.com/cpflat/dot2net/readme.md)
 
     git clone https://github.com/cpflat/dot2net.git
     cd dot2net

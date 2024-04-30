@@ -19,13 +19,13 @@ digraph  {
 	}
 
 	subgraph cluster4 {
-		label="as=65003";
-		r6[class="router; bgp"];
+		label="as=65003"; color="red"; fontcolor="red";
+		r6[class="router; bgp", color="red", fontcolor="red"];
 	}
 
 	sw2[class="switch"];
 	sw3[class="switch"];
-	sw4[class="switch"];
+	sw4[class="switch", color="red", fontcolor="red"];
 
 	r1->sw0[dir="none", tailclass="ibgp; ospf; priority=10"];
 	r2->sw0[dir="none", tailclass="ibgp; ospf; priority=5"]
@@ -35,6 +35,6 @@ digraph  {
 	r4->sw2[dir="none", tailclass="ebgp"];
 	r2->sw3[dir="none", tailclass="ebgp"];
 	r5->sw3[dir="none", tailclass="ebgp"];
-	r2->sw4[dir="none", tailclass="ebgp"];
-	r6->sw4[dir="none", tailclass="ebgp"];
+	r2->sw4[dir="none", tailclass="ebgp", color="red"];
+	r6->sw4[dir="none", tailclass="ebgp", color="red"];
 }
