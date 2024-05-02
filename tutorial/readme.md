@@ -93,6 +93,27 @@ Try deploying the extended topology again.
 There should be no failures, but try troubleshooting it if fails.
 
 
+## Hints for troubleshooting (updated on May 2)
+
+### Checking configuration
+
+As well as the failures in the described configuration,
+it is likely to appear that FRRouting did not successfully load the given configuration files.
+FRRouting does not output error messages on loading failures
+when importing configuration files.
+
+The easiest way to check this issue is to confirm the active configuration in each container.
+Attach the container shell with the command explaned above, and then you can go into the FRRouting configuration interface with the following command.
+
+    vtysh
+
+Next, you can check the active configuration with the following command.
+
+    show running-config
+
+Confirm the output includes the added configuration lines.
+
+
 ## What the authors requests you to do in the evaluation?
 
 We will ask you to generate appropriate configuration files for four network topologies with specified platform (Containerlab or dot2net).
