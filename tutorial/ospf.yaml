@@ -23,10 +23,10 @@ nodeclass:
   - name: router
     primary: true
     tinet:
-      image: quay.io/frrouting/frr:8.5.0
+      image: quay.io/frrouting/frr:8.5.4
     clab:
       kind: linux
-      image: quay.io/frrouting/frr:8.5.0
+      image: quay.io/frrouting/frr:8.5.4
     policy: [lo]
     config:
       - file: daemons
