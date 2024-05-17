@@ -5,7 +5,7 @@
     sudo apt install docker docker.io
 
     sudo usermod -aG docker $USER
-    docker ps  # Check that it does not output "Permission denied"
+    docker ps  # Check that it does not output "Permission denied" (If failed, try re-login)
 
 
 ## Containerlab
