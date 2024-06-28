@@ -14,5 +14,5 @@ Deploy the modified network configuration with Containerlab and then check that 
 
 ## Test items
 
-- Test reachability of r1 to r5 with ping command
-- Test reachability of r5 to r1 with ping command
+- Test reachability of r1 to r5 with ping6 command
+- Test reachability of r5 to r1 with ping6 command
