@@ -1,21 +1,21 @@
 digraph  {
         subgraph cluster1 {
                 label="as=65000";
-		r1[class="router; bgp; ospf"];
-		r2[class="router; bgp; ospf"];
-		r3[class="router; ospf"];
+		r1[class="router; bgp; ospf; as=65000"];
+		r2[class="router; bgp; ospf; as=65000"];
+		r3[class="router; ospf; as=65000"];
 		sw0[class="switch"];
 		sw1[class="switch"];
         }
 
 	subgraph cluster2 {
 		label="as=65001";
-		r4[class="router; bgp"];
+		r4[class="router; bgp; as=65001"];
 	}
 
 	subgraph cluster3 {
 		label="as=65002";
-		r5[class="router; bgp"];
+		r5[class="router; bgp; as=65002"];
 	}
 
 	sw2[class="switch"];
