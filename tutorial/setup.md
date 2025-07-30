@@ -1,4 +1,4 @@
-# Building environment (for Ubuntu)
+# Building environment (for Ubuntu 22.04)
 
 ## Docker
 
